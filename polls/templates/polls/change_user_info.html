@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Правка личных данных</title>
+</head>
+<body>
+<h2>Правка личных данных пользователя {{ user.username }}</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    <input type="hidden" name="next" value="{{ next }}">
+    <input type="submit" value="Сохранить">
+</form>
+
+</body>
+</html>

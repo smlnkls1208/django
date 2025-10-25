@@ -1,0 +1,24 @@
+<a href="{% url 'polls:login' %}">Вход</a>
+<a href="{% url 'polls:register_user' %}">Регистрация</a>
+<a href="{% url 'polls:profile' %}">Профиль</a>
+<a href="{% url 'polls:question_bb_add' %}">Добавить вопрос</a>
+{% if latest_question_list %}
+<ul>
+    {% for question in latest_question_list %}
+    <li><a href="{% url 'polls:detail' question.id %}">{{question.question_text}}</a></li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>
+    Вопросов нет!!
+</p>
+
+{% endif %}
+
+<a href="{% url 'polls:logout' %}">Выход</a>
+
+
+
+
+
+

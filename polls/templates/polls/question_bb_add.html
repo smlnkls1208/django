@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Добавить вопрос</title>
+</head>
+<body>
+<h2>Добавление вопроса</h2>
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{form}}
+    {{formset}}
+    <input type="submit" value="Добавить">
+
+</form>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<style>
+    .question-photo {
+        width: 500px;
+        height: 500px;
+        object-fit: cover;
+    }
+</style>
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            {% if question.photo %}
+                <img src="{{ question.photo.url }}" class="question-photo" alt="Фото к опросу">
+            {% endif %}
+            <h1>{{ question.title }}</h1>
+            <h2>{{ question.question_text }}</h2>
+        </legend>
+
+        {% if error_message %}
+            <p><strong>{{ error_message }}</strong></p>
+        {% endif %}
+
+        {% if already_voted %}
+            <p>Вы уже приняли участие в этом опросе.</p>
+            <p><a href="{% url 'polls:results' question.id %}">Посмотреть результаты</a></p>
+        {% else %}
+            {% for choice in question.choice_set.all %}
+                <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+            {% endfor %}
+        {% endif %}
+    </fieldset>
+
+    {% if not already_voted %}
+        <input type="submit" value="Голосовать">
+        <br>
+    {% endif %}
+
+    <a href="{% url 'polls:index' %}">На главную</a>
+</form>

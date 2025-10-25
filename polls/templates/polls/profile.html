@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Профиль</title>
+    <style>
+    .profile-photo {
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+  </style>
+</head>
+<body>
+    <h2>Профиль пользователя {{ user.username }}</h2>
+    <img src="{{ user.photo.url }}" class="profile-photo" alt="">
+    {% if user.first_name and user.last_name %}
+        <p>Здравствуйте, {{ user.first_name }} {{ user.last_name }} </p>
+        <a href="{% url 'polls:profile_change' %}">Изменить данные<br></a>
+    <a href="{% url 'polls:password_change' %}">Изменить пароль<br></a>
+    <a href="{% url 'polls:profile_delete' %}">Удалить профиль<br></a>
+
+    {% else %}
+        <p>Здравствуйте! </p>
+    <a href="{% url 'polls:profile_change' %}">Изменить данные<br></a>
+    <a href="{% url 'polls:password_change' %}">Изменить пароль<br></a>
+    <a href="{% url 'polls:profile_delete' %}">Удалить профиль<br></a>
+
+    {% endif %}
+        <a href="{% url 'polls:index' %}">На главную</a>
+
+</body>
+</html>
